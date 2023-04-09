@@ -1,0 +1,66 @@
+﻿@model ResultVM
+
+@{
+    int score = Model.Score;
+    int total = Model.Total;
+    double percent = (double)score / total * 100;
+    percent = Math.Round(percent, 1);
+}
+
+@if (percent >= 80)
+{
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-6 col-md-8">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-emoji-laughing display-1 text-success"></i>
+                        <h1 class="mt-3">Congratulations!</h1>
+                        <div class="text-success fs-4">
+                            You answered @score of @total questions correctly (<span>@percent%</span>)
+                        </div>
+                        <a href="/" class="btn btn-primary"><i class="fas fa-home"></i> Go to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else if (percent >= 50)
+{
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-6 col-md-8">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-emoji-neutral display-1 text-warning"></i>
+                        <h1 class="mt-3">Not bad!</h1>
+                        <div class="text-warning fs-4">
+                            You answered @score of @total questions correctly (<span>@percent%</span>)
+                        </div>
+                        <a href="/" class="btn btn-primary"><i class="fas fa-home"></i> Go to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-6 col-md-8">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-emoji-frown display-1 text-danger"></i>
+                        <h1 class="mt-3">Unfortunately...</h1>
+                        <div class="text-danger fs-4">
+                            You answered @score correctly from @total questions (<span>@percent%</span>), try again!
+                        </div>
+                        <a href="/" class="btn btn-primary"><i class="fas fa-home"></i> Go to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,29 @@
+﻿@model List<Test>
+
+<form method="post">
+    @{
+        int i = 0;
+    }
+    @foreach (var obj in Model)
+    {
+        i++;
+        <div>
+            <div class="mb-3">
+                <label>@obj.Question</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" value="@obj.FirstPossibleAnswer" name="Answers[@(i - 1)]" />
+                <input class="form-control" asp-for="@obj.FirstPossibleAnswer" type="text" name="AnswerTexts[@(i - 1)]" />
+                <input class="form-check-input" type="radio" value="@obj.SecondPossibleAnswer" name="Answers[@(i - 1)]" />
+                <input class="form-control" asp-for="@obj.SecondPossibleAnswer" type="text" name="AnswerTexts[@(i - 1)]" />
+                <input class="form-check-input" type="radio" value="@obj.ThirdPossibleAnswer" name="Answers[@(i - 1)]" />
+                <input class="form-control" asp-for="@obj.ThirdPossibleAnswer" type="text" name="AnswerTexts[@(i - 1)]" />
+                <input class="form-check-input" type="radio" value="@obj.FourthPossibleAnswer" name="Answers[@(i - 1)]" />
+                <input class="form-control" asp-for="@obj.FourthPossibleAnswer" type="text" name="AnswerTexts[@(i - 1)]" />
+            </div>
+        </div>
+    }
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>

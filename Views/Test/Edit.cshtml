@@ -1,0 +1,112 @@
+﻿@model Test
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Question</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Question"></label>
+            <textarea class="form-control" asp-for="Question"></textarea>
+        </div>
+        <div class="mb-3">
+            <label>Select the correct answer:</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="FirstPossibleAnswer" value="1" id="radio1" name="CorrectAnswer" />
+                <input class="form-control" asp-for="FirstPossibleAnswer" type="text" id="text1" name="text1" />
+                <input type="hidden" asp-for="FirstPossibleAnswer" id="FirstPossibleAnswer" />
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="SecondPossibleAnswer" value="2" id="radio2" name="CorrectAnswer" />
+                <input class="form-control" asp-for="SecondPossibleAnswer" type="text" id="text2" name="text2" />
+                <input type="hidden" asp-for="SecondPossibleAnswer" id="SecondPossibleAnswer" />
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="ThirdPossibleAnswer" value="3" id="radio3" name="CorrectAnswer" />
+                <input class="form-control" asp-for="ThirdPossibleAnswer" type="text" id="text3" name="text3" />
+                <input type="hidden" asp-for="ThirdPossibleAnswer" id="ThirdPossibleAnswer" />
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="FourthPossibleAnswer" value="4" id="radio4" name="CorrectAnswer" />
+                <input class="form-control" asp-for="FourthPossibleAnswer" type="text" id="text4" name="text4" />
+                <input type="hidden" asp-for="FourthPossibleAnswer" id="FourthPossibleAnswer" />
+            </div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Answer"></label>
+            <input class="form-control" asp-for="Answer" id="Answer" />
+        </div>
+        <div class="row mt-3">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Update</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-action="Index" class="btn btn-secondary border form-control">
+                    Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $("input[type='radio']").click(function () {
+                $("input[type='radio']").not(this).prop("checked", false);
+                $(this).prop("checked", true);
+                $("input[type='text']").removeClass("border border-success");
+                $(this).siblings("input[type='text']").addClass("border border-success");
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("input[type='radio']").click(function () {
+                var selectedAnswer = $(this).siblings("input[type='text']").val();
+                $("#AnswerHidden").val(selectedAnswer);
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("input[type='text']").on('input', function () {
+                var firstPossibleAnswer = $("#text1").val();
+                var secondPossibleAnswer = $("#text2").val();
+                var thirdPossibleAnswer = $("#text3").val();
+                var fourthPossibleAnswer = $("#text4").val();
+
+                var selectedAnswer = $("input[type='radio']:checked").siblings("input[type='text']").val();
+
+                $("#FirstPossibleAnswer").val(firstPossibleAnswer);
+                $("#SecondPossibleAnswer").val(secondPossibleAnswer);
+                $("#ThirdPossibleAnswer").val(thirdPossibleAnswer);
+                $("#FourthPossibleAnswer").val(fourthPossibleAnswer);
+
+                $("#AnswerHidden").val(selectedAnswer);
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var answerField = $("#Answer");
+            var answer = answerField.val();
+            var answerRadio = $("input[type='text']").filter(function () {
+                return $(this).val() == answer;
+            }).siblings("input[type='radio']");
+            answerRadio.prop("checked", true);
+            $("input[type='radio']").click(function () {
+                var selectedAnswer = $(this).siblings("input[type='text']").val();
+                answerField.val(selectedAnswer);
+            });
+        });
+    </script>
+}

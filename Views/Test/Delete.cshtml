@@ -1,0 +1,43 @@
+﻿@model Test
+
+<form method="post">
+    <input asp-for="Id" hidden />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Question</h2>
+            <hr />
+        </div>
+        <div class="mb-3 row p-1">
+            <label class="p-0" asp-for="@Model.Question"></label>
+            <textarea asp-for="Question" class="form-control" disabled></textarea>
+        </div>
+        <div class="mb-3 row">
+            <label class="p-0" asp-for="@Model.FirstPossibleAnswer"></label>
+            <input asp-for="FirstPossibleAnswer" class="form-control" disabled/>
+        </div>
+        <div class="mb-3 row">
+            <label class="p-0" asp-for="@Model.SecondPossibleAnswer"></label>
+            <input asp-for="SecondPossibleAnswer" class="form-control" disabled />
+        </div>
+        <div class="mb-3 row">
+            <label class="p-0" asp-for="@Model.ThirdPossibleAnswer"></label>
+            <input asp-for="ThirdPossibleAnswer" class="form-control" disabled />
+        </div>
+        <div class="mb-3 row">
+            <label class="p-0" asp-for="@Model.FourthPossibleAnswer"></label>
+            <input asp-for="FourthPossibleAnswer" class="form-control" disabled />
+        </div>
+        <div class="mb-3 row">
+            <label class="p-0" asp-for="@Model.Answer"></label>
+            <input asp-for="Answer" class="form-control" disabled />
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Delete</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-action="Index" class="btn btn-secondary border form-control">Back to list</a>
+            </div>
+        </div>
+    </div>
+</form>
